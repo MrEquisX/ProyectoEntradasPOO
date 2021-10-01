@@ -3,38 +3,59 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package venta_entradas;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author ignac
  */
-
 public class Region {
     private int id;
-    private String nombre;
+    private String name;
+    private ArrayList<Eventos> lugar = new ArrayList<Eventos>();
     
-    //Contructores
-    public Region(int id, String nombre) {
+//Constructor
+        public Region(int id, String name) {
         this.id = id;
-        this.nombre = nombre;
-    }
+        this.name = name;
+    }       
+
     
-    //Getters&Setters
+//Getters
     public int getId() {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Eventos> getLugar() {
+        return lugar;
+    }
+
+
+//Setters    
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setLugar(ArrayList<Eventos> lugar) {
+        this.lugar = lugar;
     }
-    
-    
+
+    public String[] getData(){
+        String data[] = new String[2];
+        data[0] = Integer.toString(this.id);
+        data[1] = this.name;
+
+        return data;
+    }
+
 }

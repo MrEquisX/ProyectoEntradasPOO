@@ -1,83 +1,75 @@
-
-import java.util.ArrayList;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package venta_entradas;
+
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  *
  * @author ignac
  */
-public class Eventos {
-    private int id;
-    private String nombre;
+class Eventos {
+    private int idEventos;
+    private String name;
     private String fecha_Evento;
-    private String capacidad_MAX;
-    private String cantidad_Categorias;
-    private String tamMAX_POR_CATEGORIA;
-    private ArrayList<Region> ubicacion_evento = new ArrayList<Region>();
-    private String lugar;
+    private ArrayList<Entradas> entrada = new ArrayList<Entradas>();
+    private HashMap <Integer, LugarEvento> lugares = new HashMap <Integer, LugarEvento>();
+  
 
-    //Contructores
-    public Eventos(int id, String nombre, String fecha_Evento, String capacidad_MAX, String lugar) {
-        this.id = id;
-        this.nombre = nombre;
+//Constructor
+    public Eventos(int idEventos, String name, String fecha_Evento) {
+        this.idEventos = idEventos;
+        this.name = name;
         this.fecha_Evento = fecha_Evento;
-        this.capacidad_MAX = capacidad_MAX;
-        this.lugar = lugar;
     }
     
-    //Getters&Setters    
-    public int getId() {
-        return id;
+      
+//Getters
+    public int getIdEventos() {
+        return idEventos;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getName() {
+        return name;
     }
 
     public String getFecha_Evento() {
         return fecha_Evento;
+    }
+    
+    
+//Setters
+    public void setIdEventos(int idEventos) {
+        this.idEventos = idEventos;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setFecha_Evento(String fecha_Evento) {
         this.fecha_Evento = fecha_Evento;
     }
 
-    public String getCapacidad_MAX() {
-        return capacidad_MAX;
+    
+//Metodos
+//Retorna informacion del evento
+    public String[] getData(){
+        String[] data= new String[3];
+
+        data[0] = Integer.toString(idEventos);
+        data[1] = name;
+        data[2] = fecha_Evento;        
+
+        return data;
     }
-
-    public void setCapacidad_MAX(String capacidad_MAX) {
-        this.capacidad_MAX = capacidad_MAX;
-    }
-
-    public ArrayList<Region> getUbicacion_evento() {
-        return ubicacion_evento;
-    }
-
-    public void setUbicacion_evento(ArrayList<Region> ubicacion_evento) {
-        this.ubicacion_evento = ubicacion_evento;
-    }
-
-    public String getLugar() {
-        return lugar;
-    }
-
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
-    }
-
-
+    
 }

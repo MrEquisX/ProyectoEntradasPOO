@@ -3,56 +3,44 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package venta_entradas;
 
-/**
- *
- * @author ignac
- */
+import java.util.ArrayList;
+
 public class Entradas {
     private int id;
-    private int catogoria;
-    private String precio;
-    private String asiento;
-      
-    //Contructores
-    public Entradas(int id, int catogoria, String precio, String asiento) {
+    private String categoria;
+    private long precio;
+    private String entradaEvento; //Identificador de entrada del evento
+    private boolean agotada; //Si es que se encuentran agotadas o no
+    private ArrayList<Ventas> ventaEntradas = new ArrayList<Ventas>();
+
+    public Entradas(int id, String categoria, long precio, String entradaEvento, boolean agotada) {
         this.id = id;
-        this.catogoria = catogoria;
+        this.categoria = categoria;
         this.precio = precio;
-        this.asiento = asiento;
+        this.entradaEvento = entradaEvento;
+        this.agotada = false;
+    }
+    //Getters
+    public int getId() { return id; }
+    public String getCategoria() { return categoria; }
+    public long getPrecio() { return precio; }
+    public String getEntradaEvento() { return entradaEvento; }
+    public boolean getAgotada() { return agotada; }
+    public ArrayList<Ventas> getVentaEntradas() {
+        return ventaEntradas;
     }
     
-    //Getters&Setters
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
+    //Setters
+    public void setId(int id) { this.id = id; }
+    public void setCategoria(String categoria) { this.categoria = categoria; }
+    public void setPrecio(long precio) { this.precio = precio; }
+    public void setEntradaEvento(String entradaEvento) { this.entradaEvento = entradaEvento; }
+    public void setAgotada(boolean agotada) { this.agotada = true; }
+    public void setVentaEntradas(ArrayList<Ventas> ventaEntradas) {
+        this.ventaEntradas = ventaEntradas;
     }
-
-    public int getCatogoria() {
-        return catogoria;
-    }
-
-    public void setCatogoria(int catogoria) {
-        this.catogoria = catogoria;
-    }
-
-    public String getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(String precio) {
-        this.precio = precio;
-    }
-
-    public String getAsiento() {
-        return asiento;
-    }
-
-    public void setAsiento(String asiento) {
-        this.asiento = asiento;
-    }
-  
+    
 }

@@ -3,27 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package venta_entradas;
 
-/**
- *
- * @author ignac
- */
 public class Cliente {
     private int id;
     private String nombre;
     private String rut;
     private int edad;
-    private String num_Telefonico;
 
-    //Contructores
-    public Cliente(int id, String nombre, String rut, int edad, String num_Telefonico) {
-        this.id = id;
+    //Contructor
+    public Cliente(String nombre, String rut, int edad) {
         this.nombre = nombre;
         this.rut = rut;
         this.edad = edad;
-        this.num_Telefonico = num_Telefonico;
     }
-    
+
     //Getters&Setters
     public int getId() {
         return id;
@@ -57,12 +51,4 @@ public class Cliente {
         this.edad = edad;
     }
 
-    public String getNum_Telefonico() {
-        return num_Telefonico;
-    }
-
-    public void setNum_Telefonico(String num_Telefonico) {
-        this.num_Telefonico = num_Telefonico;
-    }
-        
 }
