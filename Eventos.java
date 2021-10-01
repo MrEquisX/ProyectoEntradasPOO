@@ -72,4 +72,22 @@ class Eventos {
         return data;
     }
     
+ //OPERACIONES HASHMAP
+    
+    //Anade un lugar
+    public void addLugar(int key, LugarEvento nuevo){
+        this.lugares.put(this.lugares.size(), nuevo);
+    }
+    
+    //Modifica un lugar
+    public void modifLugar(int key, String nombre, int capacidad){
+        LugarEvento lugar = this.lugares.get(key);
+        lugar.setNombreLugar(nombre);
+        lugar.setCapacidad(capacidad);
+    }
+    
+    //Remueve un lugar
+    public void removeLugar(int key){
+        this.lugares.remove(key);
+    }
 }
