@@ -42,5 +42,5 @@ public class Entradas {
     public void setVentaEntradas(ArrayList<Ventas> ventaEntradas) {
         this.ventaEntradas = ventaEntradas;
     }
-    
+  
 }
