@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package venta_entradas;
+package CODIGO;
 
 import java.util.ArrayList;
 
@@ -12,50 +12,58 @@ import java.util.ArrayList;
  * @author ignac
  */
 public class Region {
-    private int id;
-    private String name;
-    private ArrayList<Eventos> lugar = new ArrayList<Eventos>();
-    
-//Constructor
-        public Region(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }       
+    private String id;
+    private String nombre;
+    private ArrayList<Eventos> evento = new ArrayList<Eventos>();
+    private ArrayList<ComboItems> jCombo = new ArrayList<ComboItems>();
 
-    
-//Getters
-    public int getId() {
+//Constructor    
+
+    public Region(String id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+       
+//Getters&Setters
+
+    public String getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public ArrayList<Eventos> getLugar() {
-        return lugar;
-    }
-
-
-//Setters    
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setLugar(ArrayList<Eventos> lugar) {
-        this.lugar = lugar;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
+    public ArrayList<Eventos> getEvento() {
+        return evento;
+    }
+
+    public void setEvento(ArrayList<Eventos> evento) {
+        this.evento = evento;
+    }
+
+    public ArrayList<ComboItems> getjCombo() {
+        return jCombo;
+    }
+
+    public void setjCombo(ArrayList<ComboItems> jCombo) {
+        this.jCombo = jCombo;
+    }
+    
+//ENTREGA INFORMACION    
     public String[] getData(){
         String data[] = new String[2];
-        data[0] = Integer.toString(this.id);
-        data[1] = this.name;
+        data[0] = this.id;
+        data[1] = this.nombre;
 
         return data;
     }
-
 }

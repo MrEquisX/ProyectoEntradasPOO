@@ -3,22 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package venta_entradas;
+package CODIGO;
 
-public class Cliente {
+/**
+ *
+ * @author ignac
+ */
+public abstract class Cliente {
     private int id;
     private String nombre;
     private String rut;
-    private int edad;
+    private int entradasAcomprar;
 
     //Contructor
-    public Cliente(String nombre, String rut, int edad) {
+
+    public Cliente(int id, String nombre, String rut, int entradasAcomprar) {
+        this.id = id;
         this.nombre = nombre;
         this.rut = rut;
-        this.edad = edad;
+        this.entradasAcomprar = entradasAcomprar;
     }
+    
 
     //Getters&Setters
+
     public int getId() {
         return id;
     }
@@ -43,12 +51,25 @@ public class Cliente {
         this.rut = rut;
     }
 
-    public int getEdad() {
-        return edad;
+    public int getEntradasAcomprar() {
+        return entradasAcomprar;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setEntradasAcomprar(int entradasAcomprar) {
+        this.entradasAcomprar = entradasAcomprar;
     }
-
+    
+    //Retorna informacion del cliente que compra
+    public String[] getData(){
+        String[] data = new String [3];
+        
+        data[1] = Integer.toString(id);
+        data[2] = rut;
+        data[3] = nombre;
+                
+        return data;
+    }
+    
+    public abstract void descuento();
+    
 }

@@ -3,44 +3,57 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package venta_entradas;
+package CODIGO;
 
 import java.util.ArrayList;
 
-public class Entradas {
+/**
+ *
+ * @author ignac
+ */
+class Entradas {
     private int id;
-    private String categoria;
-    private long precio;
     private String entradaEvento; //Identificador de entrada del evento
-    private boolean agotada; //Si es que se encuentran agotadas o no
+    private int precio;
     private ArrayList<Ventas> ventaEntradas = new ArrayList<Ventas>();
 
-    public Entradas(int id, String categoria, long precio, String entradaEvento, boolean agotada) {
+    public Entradas(int id, String entradaEvento, int precio) {
         this.id = id;
-        this.categoria = categoria;
-        this.precio = precio;
         this.entradaEvento = entradaEvento;
-        this.agotada = false;
+        this.precio = precio;
     }
-    //Getters
-    public int getId() { return id; }
-    public String getCategoria() { return categoria; }
-    public long getPrecio() { return precio; }
-    public String getEntradaEvento() { return entradaEvento; }
-    public boolean getAgotada() { return agotada; }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEntradaEvento() {
+        return entradaEvento;
+    }
+
+    public void setEntradaEvento(String entradaEvento) {
+        this.entradaEvento = entradaEvento;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
     public ArrayList<Ventas> getVentaEntradas() {
         return ventaEntradas;
     }
-    
 
-    //Setters
-    public void setId(int id) { this.id = id; }
-    public void setCategoria(String categoria) { this.categoria = categoria; }
-    public void setPrecio(long precio) { this.precio = precio; }
-    public void setEntradaEvento(String entradaEvento) { this.entradaEvento = entradaEvento; }
-    public void setAgotada(boolean agotada) { this.agotada = true; }
     public void setVentaEntradas(ArrayList<Ventas> ventaEntradas) {
         this.ventaEntradas = ventaEntradas;
     }
-  
+    
+   
 }

@@ -3,10 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package venta_entradas;
+package CODIGO;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author ignac
+ */
 public class Ventas {
     private int id;
     private ArrayList<Cliente> id_Cliente = new ArrayList<Cliente>();
@@ -96,3 +100,4 @@ public class Ventas {
     
     
 }
+
