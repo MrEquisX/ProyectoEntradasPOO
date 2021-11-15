@@ -5,6 +5,9 @@
  */
 package Ventanas;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author ignac
@@ -18,6 +21,7 @@ public class MENU_ADMIN extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,13 +34,18 @@ public class MENU_ADMIN extends javax.swing.JFrame {
 
         ATRAS = new javax.swing.JButton();
         SALIR = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        IR_Eventos = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        IR_Regiones = new javax.swing.JButton();
         jLabelFONDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ATRAS.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        ATRAS.setText("ATRAS");
+        ATRAS.setText("ATRÁS");
         ATRAS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ATRASActionPerformed(evt);
@@ -53,8 +62,38 @@ public class MENU_ADMIN extends javax.swing.JFrame {
         });
         getContentPane().add(SALIR, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, 100, 40));
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setText("         ADMINISTRADORES  ------>");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 580, -1));
+
+        IR_Eventos.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        IR_Eventos.setText("IR");
+        IR_Eventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IR_EventosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(IR_Eventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 120, 60));
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel2.setText("            MENU ADMIN");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 430, -1));
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel3.setText("         EVENTOS -------->");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 430, -1));
+
+        IR_Regiones.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        IR_Regiones.setText("IR");
+        IR_Regiones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IR_RegionesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(IR_Regiones, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, 120, 60));
+
         jLabelFONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/27496.jpg"))); // NOI18N
-        getContentPane().add(jLabelFONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabelFONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 570));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -69,6 +108,29 @@ public class MENU_ADMIN extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_SALIRActionPerformed
+
+    private void IR_EventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IR_EventosActionPerformed
+        MENU_ADDEVENTOS aux = null;
+        try {
+            aux = new MENU_ADDEVENTOS();
+        } catch (Exception ex) {
+            Logger.getLogger(MENU_ADMIN.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        aux.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_IR_EventosActionPerformed
+
+    private void IR_RegionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IR_RegionesActionPerformed
+        // TODO add your handling code here:
+        MENU_ADDADMIN aux = null;
+        try {
+            aux = new MENU_ADDADMIN();
+        } catch (Exception ex) {
+            Logger.getLogger(MENU_ADMIN.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        aux.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_IR_RegionesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -107,7 +169,12 @@ public class MENU_ADMIN extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ATRAS;
+    private javax.swing.JButton IR_Eventos;
+    private javax.swing.JButton IR_Regiones;
     private javax.swing.JButton SALIR;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelFONDO;
     // End of variables declaration//GEN-END:variables
 }

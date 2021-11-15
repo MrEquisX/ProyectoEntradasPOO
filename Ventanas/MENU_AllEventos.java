@@ -7,31 +7,37 @@ package Ventanas;
 
 import CODIGO.CSVCode;
 import CODIGO.Eventos;
-import CODIGO.Region;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author ignac
  */
 public class MENU_AllEventos extends javax.swing.JFrame {
-    
+    TableRowSorter trs;
+    DefaultTableModel tDatos = new DefaultTableModel();
     /**
      * Creates new form MENU_AllEventos
+     * @throws java.lang.Exception
      */
     public MENU_AllEventos() throws Exception{
         initComponents();
         this.setLocationRelativeTo(null);
         MostrarDatos_Eventos();
+
     }
     
     public void MostrarDatos_Eventos() throws Exception{
-        DefaultTableModel tDatos = new DefaultTableModel();
+        
         tDatos.addColumn("IdEvento");
         tDatos.addColumn("Nombre");
         tDatos.addColumn("Fecha_Evento");
@@ -107,6 +113,11 @@ public class MENU_AllEventos extends javax.swing.JFrame {
 
         TEXTO.setText("Filtrar:");
 
+        jTextFILTRO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFILTROActionPerformed(evt);
+            }
+        });
         jTextFILTRO.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextFILTROKeyTyped(evt);
@@ -142,7 +153,7 @@ public class MENU_AllEventos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+        
     private void ATRASActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ATRASActionPerformed
         JFrame_INICIO aux = null;
         try {
@@ -163,6 +174,19 @@ public class MENU_AllEventos extends javax.swing.JFrame {
         // TODO add your handling code here:
         //jTextFILTRO.addKeyListener(l);
     }//GEN-LAST:event_jTextFILTROKeyTyped
+
+    private void jTextFILTROActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFILTROActionPerformed
+        // TODO add your handling code here:
+
+        
+        jTextFILTRO.addKeyListener(new KeyAdapter(){
+        public void KeyRealesed(KeyEvent ke){
+            trs.setRowFilter(RowFilter.regexFilter(jTextFILTRO.getText(), 0));
+        }
+        });
+        trs = new TableRowSorter(tDatos);
+        TablaEventos.setRowSorter(trs);
+    }//GEN-LAST:event_jTextFILTROActionPerformed
 
     /**
      * @param args the command line arguments

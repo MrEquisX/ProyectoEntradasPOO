@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,11 +25,14 @@ public class CSVCode {
     private String name;
     private ArrayList<Region> regiones = new ArrayList<Region>();
     private ArrayList<Eventos> eventos = new ArrayList<Eventos>();
+    private ArrayList<Administrador> admin = new ArrayList<Administrador>();
+    private HashMap <Integer, InformacionEvento> infoEvento = new HashMap <Integer, InformacionEvento>();
 
     public CSVCode(int id, String name) {
         this.id = id;
         this.name = name;
     }
+
     
 //Getters&Setters    
     public ArrayList<Region> getRegiones() {
@@ -46,13 +50,80 @@ public class CSVCode {
     public void setEventos(ArrayList<Eventos> eventos) {
         this.eventos = eventos;
     }
+
+    public ArrayList<Administrador> getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(ArrayList<Administrador> admin) {
+        this.admin = admin;
+    }
+
+    public HashMap<Integer, InformacionEvento> getInfoEvento() {
+        return infoEvento;
+    }
+
+    public void setInfoEvento(HashMap<Integer, InformacionEvento> infoEvento) {
+        this.infoEvento = infoEvento;
+    }
     
     
-//Metodos
+//METODOS ADMIN
+    //Anade un admin
+    public boolean newAdmin(String user, String pass) throws IOException, Exception{
+        ArrayList<Administrador> listaAdmin = new ArrayList();
+        listaAdmin = CSVCode.cargarAdmin();
+        CSVWriter writerAdmin = new CSVWriter(new FileWriter("src/Database/Administrador.csv"));
+        try {
+            List<String[]> data = new ArrayList<String[]>();
+            data.add(new String[] {"user","pass"});
+            
+            for (Administrador a : listaAdmin){
+                data.add(new String[] {a.getUser(), a.getPassword()});
+            }
+            
+            data.add(new String[] {user , pass});
+            
+            writerAdmin.writeAll(data);
+            writerAdmin.close();
+            return true;
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    //Edita un evento
+    public void editAdmin(String user, String pass) throws IOException, Exception {
+        ArrayList<Administrador> listaAdmin = new ArrayList();
+        listaAdmin = CSVCode.cargarAdmin();
+        CSVWriter writerAdmin = new CSVWriter(new FileWriter("src/Database/Administrador.csv"));
+        try {
+            List<String[]> data = new ArrayList<String[]>();
+            data.add(new String[] {"user","pass"});
+            
+            for (Administrador a : listaAdmin){
+                if (a.getUser().equals(user)){
+                   data.add(new String[] {user, pass});
+                }else{
+                   data.add(new String[] {a.getUser(), a.getPassword()});
+                }
+            }
+                     
+            writerAdmin.writeAll(data);
+            writerAdmin.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
 
         
 //METODOS REGIONES
-//retorna informacion de
+    //retorna informacion de
     public String[] getInfoRegion(String id) {
         String [] data = new String[2];
 
@@ -64,7 +135,7 @@ public class CSVCode {
         return data;
     }
     
-        public ArrayList<String[]> getInfoRegiones() {
+    public ArrayList<String[]> getInfoRegiones() {
         ArrayList<String []> data = new ArrayList<String[]>();
 
         for (Region region : this.regiones) {
@@ -72,7 +143,8 @@ public class CSVCode {
         }
         return data;
     }
-        
+   
+                
 //METODOS EVENTOS
         
      //Retorna informacion de todos los eventos
@@ -83,9 +155,108 @@ public class CSVCode {
             data.add(eventos.getData());
         }
         return data;
+    }
+    
+    //Anade un Evento
+    public int newEvento(String nombre, String fecha, String idRegion) throws IOException, Exception{
+        ArrayList<Eventos> lista = new ArrayList();
+        lista = CSVCode.cargarEventos();        
+        CSVWriter writerEvento = new CSVWriter(new FileWriter("src/Database/Eventos.csv"));
+        try {
+            List<String[]> data = new ArrayList<String[]>();
+            data.add(new String[] {"id", "nombre", "fecha","idRegion"});
+            
+            //int contador = 1;
+            int mayor=0;
+            for (Eventos ev : lista){
+                if (ev.getIdEventos()>mayor){
+                    mayor=ev.getIdEventos();
+                }   
+                data.add(new String[] {Integer.toString(ev.getIdEventos()), ev.getName(), ev.getFecha_Evento(),ev.getIdRegion()});                                            
+           }
+            
+            mayor++;
+            data.add(new String[] {Integer.toString(mayor), nombre , fecha , idRegion});
+            
+            writerEvento.writeAll(data);
+            writerEvento.close();
+            return mayor;
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
+       
+    }
+    
+    //Edita un evento
+    public void editEventos(int idEvento, String nombreEvento, String fecha) throws IOException, Exception {
+        ArrayList<Eventos> listaEventos = new ArrayList();
+        listaEventos = CSVCode.cargarEventos();        
+        CSVWriter writerEvento = new CSVWriter(new FileWriter("src/Database/Eventos.csv"));
+        try {
+            List<String[]> data = new ArrayList<String[]>();
+            data.add(new String[] {"id", "nombre", "fecha","idRegion"});
+            
+            for (Eventos ev : listaEventos){
+                if (ev.getIdEventos()== idEvento){
+                   data.add(new String[] {Integer.toString(ev.getIdEventos()), nombreEvento, fecha, ev.getIdRegion()});
+                }else{
+                   data.add(new String[] {Integer.toString(ev.getIdEventos()), ev.getName(), ev.getFecha_Evento(),ev.getIdRegion()});
+                }
+            }
+                     
+            writerEvento.writeAll(data);
+            writerEvento.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Elimina un evento
+    public void removeEventos(int idEvento) throws Exception {
+        ArrayList<Eventos> listaEventos = new ArrayList();
+        listaEventos = CSVCode.cargarEventos();        
+        CSVWriter writerEvento = new CSVWriter(new FileWriter("src/Database/Eventos.csv"));
+        try {
+            List<String[]> data = new ArrayList<String[]>();
+            data.add(new String[] {"id", "nombre", "fecha","idRegion"});
+            
+            for (Eventos ev : listaEventos){
+                if (ev.getIdEventos()!= idEvento){
+                   data.add(new String[] {Integer.toString(ev.getIdEventos()), ev.getName(), ev.getFecha_Evento(),ev.getIdRegion()});
+                }
+            }
+                     
+            writerEvento.writeAll(data);
+            writerEvento.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+//OPERACIONES HASHMAP
+    //Anade info+Evento
+    public void addInfo(int key, InformacionEvento nuevo){
+        this.infoEvento.put(this.infoEvento.size(), (InformacionEvento) nuevo);
+    }
+    
+    //Modifica info+Evento
+    public void modifInfo(int key, int cantidadEntradas, int precioEntradas, String lugar){
+        InformacionEvento info = this.infoEvento.get(key);
+        info.setCantidadEntradas(cantidadEntradas);
+        info.setPrecioEntradas(precioEntradas);
+        info.setLugarEvento(lugar);
+    }
+    
+    //Remueve info+Evento
+    public void removeInfo(int key){
+        this.infoEvento.remove(key);
     }    
         
- 
+        
 //CSV BDD
     public static ArrayList <Region> cargarRegiones() throws Exception {
         Region nuevo;
@@ -100,7 +271,7 @@ public class CSVCode {
         }
         return lista;
     }
-    
+        
     public static ArrayList <Eventos> cargarEventos() throws Exception {
         Eventos nuevo;
         ArrayList<Eventos> lista = new ArrayList();
@@ -114,41 +285,18 @@ public class CSVCode {
         }
         return lista;
     }
-    
-    public void actualizarBd() throws Exception {
+   
+    public static ArrayList <Administrador> cargarAdmin() throws Exception{
+        Administrador nuevo;
+        ArrayList<Administrador> listaAdmin = new ArrayList();
+        CSVReader csvReader = new CSVReaderBuilder(new FileReader("src/Database/Administrador.csv")).withSkipLines(1).build();
         
-    //----------CSVRegion-------------------------------------------
-        CSVWriter writerRegion = new CSVWriter(new FileWriter("src/Database/Region.csv"));
-        try {
-            //Crea la lista de strings que guardara en un CSV
-            List<String[]> data = new ArrayList<String[]>();
-            data.add(new String[] {"id", "nombre" });
-
-            for (Region r: this.regiones){
-                data.add(new String[] { r.getId(), r.getNombre()});
-            }
-
-            writerRegion.writeAll(data);
-            writerRegion.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    
-    //----------CSVEvento-------------------------------------------
-        CSVWriter writerEvento = new CSVWriter(new FileWriter("src/Database/Eventos.csv"));
-        try {
-            List<String[]> data = new ArrayList<String[]>();
-            data.add(new String[] {"id", "nombre", "fecha","idRegion"});
-            
-            for (Eventos ev : this.eventos){
-                data.add(new String[] {Integer.toString(ev.getIdEventos()), ev.getName(), ev.getFecha_Evento(),ev.getIdRegion()});
-            }
-            
-            writerEvento.writeAll(data);
-            writerEvento.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<String[]> data = csvReader.readAll();
         
-    }    
+        for(String [] linea : data){
+            nuevo = new Administrador(linea[0],linea[1]);            
+            listaAdmin.add(nuevo);
+        }
+        return listaAdmin;
+    }
 }

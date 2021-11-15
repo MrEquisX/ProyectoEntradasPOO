@@ -11,13 +11,18 @@ package CODIGO;
  */
 public class ClienteSocio extends Cliente {
 
-    public ClienteSocio(int id, String nombre, String rut, int entradasAcomprar) {
-        super(id, nombre, rut, entradasAcomprar);
+    public ClienteSocio(String nombre, String rut, boolean socio, String medioPago) {
+        super(nombre, rut, socio, medioPago);
     }
-   
+    
     @Override
     public void descuento() {
         //Se entregara una funcion que de descuento a los socios
+    }
+
+    @Override
+    public void imprimeInformacion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

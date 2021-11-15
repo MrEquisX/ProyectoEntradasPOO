@@ -9,21 +9,15 @@ package CODIGO;
  *
  * @author ignac
  */
-public abstract class Cliente {
+public abstract class Cliente extends Pago implements Venta {
     private int id;
-    private String nombre;
-    private String rut;
     private int entradasAcomprar;
 
     //Contructor
 
-    public Cliente(int id, String nombre, String rut, int entradasAcomprar) {
-        this.id = id;
-        this.nombre = nombre;
-        this.rut = rut;
-        this.entradasAcomprar = entradasAcomprar;
+    public Cliente(String nombre, String rut, boolean socio, String medioPago) {
+        super(nombre, rut, socio, medioPago);
     }
-    
 
     //Getters&Setters
 
@@ -58,7 +52,15 @@ public abstract class Cliente {
     public void setEntradasAcomprar(int entradasAcomprar) {
         this.entradasAcomprar = entradasAcomprar;
     }
-    
+
+    public String getMedioDePago() {
+        return medioPago;
+    }
+
+    public void setMedioDePago(String medioPago) {
+        this.medioPago = medioPago;
+    }
+   
     //Retorna informacion del cliente que compra
     public String[] getData(){
         String[] data = new String [3];

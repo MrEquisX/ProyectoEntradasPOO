@@ -45,8 +45,16 @@ public class JFrame_INICIOADMIN extends javax.swing.JFrame {
 
         jLabelLOGOUSER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/intento.png"))); // NOI18N
         getContentPane().add(jLabelLOGOUSER, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 180, 200));
+
+        USER.setText("admin");
+        USER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                USERActionPerformed(evt);
+            }
+        });
         getContentPane().add(USER, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, 220, 60));
 
+        PASSWORD.setText("123");
         PASSWORD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PASSWORDActionPerformed(evt);
@@ -128,6 +136,10 @@ public class JFrame_INICIOADMIN extends javax.swing.JFrame {
         aux.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonATRASActionPerformed
+
+    private void USERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_USERActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_USERActionPerformed
 
     /**
      * @param args the command line arguments

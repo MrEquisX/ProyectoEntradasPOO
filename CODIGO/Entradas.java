@@ -15,7 +15,7 @@ class Entradas {
     private int id;
     private String entradaEvento; //Identificador de entrada del evento
     private int precio;
-    private ArrayList<Ventas> ventaEntradas = new ArrayList<Ventas>();
+    private ArrayList<Venta> ventaEntradas = new ArrayList<Venta>();
 
     public Entradas(int id, String entradaEvento, int precio) {
         this.id = id;
@@ -46,14 +46,5 @@ class Entradas {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-
-    public ArrayList<Ventas> getVentaEntradas() {
-        return ventaEntradas;
-    }
-
-    public void setVentaEntradas(ArrayList<Ventas> ventaEntradas) {
-        this.ventaEntradas = ventaEntradas;
-    }
-    
-   
+      
 }

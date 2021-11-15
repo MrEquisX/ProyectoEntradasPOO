@@ -56,7 +56,7 @@ public class Eventos {
     public void setIdRegion(String idRegion) {
         this.idRegion = idRegion;
     }
-     
+    
     //Retorna informacion del evento
     public String[] getData(){
         String[] data= new String[4];
