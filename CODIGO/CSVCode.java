@@ -146,6 +146,7 @@ public class CSVCode {
 
         
 //METODOS REGIONES
+
     //retorna informacion de
     public String[] getInfoRegion(String id) {
         String [] data = new String[2];
@@ -169,7 +170,18 @@ public class CSVCode {
    
                 
 //METODOS EVENTOS
-        
+     //Revisa si existe un evento segun su id
+    public boolean existeEvento(int id) {
+        for (Eventos eventos : this.eventos) if (id == eventos.getIdEventos()) return true;
+        return false;
+    }
+
+    //Revisa si existe un evento segun su nombre
+    public boolean existeEvento(String nombre) {
+        for (Eventos eventos : this.eventos) if (nombre.equalsIgnoreCase(eventos.getName())) return true;
+        return false;
+    }
+    
      //Retorna informacion de todos los eventos
     public ArrayList<String[]> getInfoEventos() {
         ArrayList<String[]> data = new ArrayList<String[]>();

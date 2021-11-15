@@ -67,5 +67,19 @@ public class Eventos {
         data[3] = idRegion;
         return data;
     }
+    
+    //Checkea si existe una entrada segun su id
+    public boolean checkEntradas(int id){
+    for (Entradas entrada : this.entrada) if (id == entrada.getId()) return true;
+        return false;
+    }
+    
+    //Checkea si existe una entrada a traves de su codigo
+    public boolean checkEntradas(String codigo) {
+        for(Entradas e : entrada) {
+            if(e.getEntradaEvento().equalsIgnoreCase(codigo)) return true;
+        }
+        return false;
+    }
        
 }
