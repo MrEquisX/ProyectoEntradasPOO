@@ -119,6 +119,29 @@ public class CSVCode {
         }
     }
     
+    //Elimina un evento
+    public void removeAdmin(String user) throws Exception {
+        ArrayList<Administrador> listaAdmin = new ArrayList();
+        listaAdmin = CSVCode.cargarAdmin();        
+        CSVWriter writerAdmin = new CSVWriter(new FileWriter("src/Database/Administrador.csv"));
+        try {
+            List<String[]> data = new ArrayList<String[]>();
+            data.add(new String[] {"user", "pass"});
+            
+            for (Administrador a : listaAdmin){
+                if (a.getUser()!= user){
+                   data.add(new String[] {a.getUser(),a.getPassword()});
+                }
+            }
+                     
+            writerAdmin.writeAll(data);
+            writerAdmin.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     
 
         

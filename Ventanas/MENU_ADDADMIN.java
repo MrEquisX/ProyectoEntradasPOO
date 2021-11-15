@@ -251,12 +251,11 @@ public class MENU_ADDADMIN extends javax.swing.JFrame {
         System.out.println(tDatos.getValueAt(fila, 1));
         System.out.println(tDatos.getValueAt(fila, 2));
         /*/
-        String idAdminStr = (String) tDatos.getValueAt(fila, 0);
-        int idEvento = Integer.parseInt(idAdminStr);
         if(fila>=0){
             tDatos.removeRow(fila);
             try {
-                miBD.removeEventos(idEvento);
+                String user = null;
+                miBD.removeAdmin(user);
             } catch (Exception ex) {
                 Logger.getLogger(MENU_ADDEVENTOS.class.getName()).log(Level.SEVERE, null, ex);
             }
