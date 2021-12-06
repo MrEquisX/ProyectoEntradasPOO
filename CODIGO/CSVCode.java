@@ -8,6 +8,8 @@ package CODIGO;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,13 +22,13 @@ import java.util.List;
  *
  * @author ignac
  */
-public class CSVCode {
+public class CSVCode extends Exception {
     private int id;
     private String name;
     private ArrayList<Region> regiones = new ArrayList<Region>();
     private ArrayList<Eventos> eventos = new ArrayList<Eventos>();
     private ArrayList<Administrador> admin = new ArrayList<Administrador>();
-    private HashMap <Integer, InformacionEvento> infoEvento = new HashMap <Integer, InformacionEvento>();
+    private HashMap <Integer, InformacionRegion> infoRegion = new HashMap <Integer, InformacionRegion>();
 
     public CSVCode(int id, String name) {
         this.id = id;
@@ -59,12 +61,12 @@ public class CSVCode {
         this.admin = admin;
     }
 
-    public HashMap<Integer, InformacionEvento> getInfoEvento() {
-        return infoEvento;
+    public HashMap<Integer, InformacionRegion> getInfoRegion() {
+        return infoRegion;
     }
 
-    public void setInfoEvento(HashMap<Integer, InformacionEvento> infoEvento) {
-        this.infoEvento = infoEvento;
+    public void setInfoRegion(HashMap<Integer, InformacionRegion> infoRegion) {
+        this.infoRegion = infoRegion;
     }
     
     
@@ -141,10 +143,7 @@ public class CSVCode {
             e.printStackTrace();
         }
     }
-    
-    
-
-        
+           
 //METODOS REGIONES
 
     //retorna informacion de
@@ -167,7 +166,37 @@ public class CSVCode {
         }
         return data;
     }
-   
+    
+    //Reporte
+    public boolean reporteRegion(String id, String nombre) throws IOException, Exception{
+        ArrayList<Region> listaRegiones = new ArrayList();
+        listaRegiones = CSVCode.cargarRegiones();
+        File reporteRegion = new File("src/Database/Reporte.txt");
+        
+        //Si no existe es creado
+        if (!reporteRegion.exists()){
+            reporteRegion.createNewFile();
+        }
+        
+        List<String[]> data = new ArrayList<String[]>();
+        data.add(new String[] {"id", "nombre"});
+        
+        for (Region r : listaRegiones){
+            data.add(new String[] {r.getId(),r.getNombre()});
+        }
+        
+        data.add(new String[] {id , nombre});
+        FileWriter fw = new FileWriter (reporteRegion);
+        BufferedWriter bw = new BufferedWriter(fw);
+        
+        return true;
+        
+        
+        
+       
+        
+                
+    }
                 
 //METODOS EVENTOS
      //Revisa si existe un evento segun su id
@@ -273,22 +302,21 @@ public class CSVCode {
     }
     
 //OPERACIONES HASHMAP
-    //Anade info+Evento
-    public void addInfo(int key, InformacionEvento nuevo){
-        this.infoEvento.put(this.infoEvento.size(), (InformacionEvento) nuevo);
+    //Anade info+Region
+    public void addInfo(int key, InformacionRegion nuevo){
+        this.infoRegion.put(this.infoRegion.size(), (InformacionRegion) nuevo);
     }
     
-    //Modifica info+Evento
-    public void modifInfo(int key, int cantidadEntradas, int precioEntradas, String lugar){
-        InformacionEvento info = this.infoEvento.get(key);
-        info.setCantidadEntradas(cantidadEntradas);
-        info.setPrecioEntradas(precioEntradas);
-        info.setLugarEvento(lugar);
+    //Modifica info+Region
+    public void modifInfo(int key, String zona, String descripcion){
+        InformacionRegion info = this.infoRegion.get(key);
+        info.setZonaRegion(zona);
+        info.setDescripcionLugar(descripcion);
     }
     
     //Remueve info+Evento
     public void removeInfo(int key){
-        this.infoEvento.remove(key);
+        this.infoRegion.remove(key);
     }    
         
         
@@ -333,5 +361,19 @@ public class CSVCode {
             listaAdmin.add(nuevo);
         }
         return listaAdmin;
+    }
+    
+    public static ArrayList <Entradas> cargarEntrada() throws Exception{
+        Entradas nuevo;
+        ArrayList<Entradas> listaEntrada = new ArrayList();
+        CSVReader csvReader = new CSVReaderBuilder(new FileReader("src/Database/Entradas.csv")).withSkipLines(1).build();
+        
+        List<String[]> data = csvReader.readAll();
+        
+        for(String [] linea : data){
+            nuevo = new Entradas(parseInt(linea[0]),linea[1],parseInt(linea[2]));            
+            listaEntrada.add(nuevo);
+        }
+        return listaEntrada;
     }
 }

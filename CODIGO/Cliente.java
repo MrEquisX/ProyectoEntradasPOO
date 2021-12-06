@@ -12,6 +12,7 @@ package CODIGO;
 public abstract class Cliente extends Pago implements Venta {
     private int id;
     private int entradasAcomprar;
+    float precioEntrada;
 
     //Contructor
 
@@ -72,6 +73,6 @@ public abstract class Cliente extends Pago implements Venta {
         return data;
     }
     
-    public abstract void descuento();
+    public abstract float descuento(int precioEntrada, float descuentoComun, float descuentoSocio) throws Exception;
     
 }

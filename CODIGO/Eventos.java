@@ -77,7 +77,7 @@ public class Eventos {
     //Checkea si existe una entrada a traves de su codigo
     public boolean checkEntradas(String codigo) {
         for(Entradas e : entrada) {
-            if(e.getEntradaEvento().equalsIgnoreCase(codigo)) return true;
+            if(e.getEntradaEvento().equals(codigo)) return true;
         }
         return false;
     }

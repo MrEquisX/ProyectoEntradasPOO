@@ -23,6 +23,22 @@ public class InformacionRegion extends Region{
         this.zonaRegion = zonaRegion;
         this.descripcionLugar = descripcionLugar;
     }
+
+    public String getZonaRegion() {
+        return zonaRegion;
+    }
+
+    public void setZonaRegion(String zonaRegion) {
+        this.zonaRegion = zonaRegion;
+    }
+
+    public String getDescripcionLugar() {
+        return descripcionLugar;
+    }
+
+    public void setDescripcionLugar(String descripcionLugar) {
+        this.descripcionLugar = descripcionLugar;
+    }
     
     //ENTREGA INFORMACION PARA VER MAS...    
     @Override
@@ -33,4 +49,5 @@ public class InformacionRegion extends Region{
 
         return data;
     }
+
 }

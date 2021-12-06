@@ -5,6 +5,14 @@
  */
 package Ventanas;
 
+import CODIGO.Administrador;
+import CODIGO.CSVCode;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,13 +20,25 @@ import javax.swing.JOptionPane;
  * @author ignac
  */
 public class JFrame_INICIOADMIN extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form JFrame_INICIOADMIN
      */
     public JFrame_INICIOADMIN() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    private boolean IniciarSesion(String user, String pass) throws Exception{
+        ArrayList<Administrador> listaAdmin = new ArrayList();
+        listaAdmin = CSVCode.cargarAdmin();
+        
+        for (Administrador admin : listaAdmin){
+            if (admin.getUser().equals(user)){
+                return admin.getPassword().equals(pass);                                  
+            }
+        }
+     return false;      
     }
 
     /**
@@ -111,25 +131,28 @@ public class JFrame_INICIOADMIN extends javax.swing.JFrame {
         // SALIR DEL PROGRAMA
         System.exit(0);
     }//GEN-LAST:event_jButtonSALIRActionPerformed
-
+    
     private void jButtonENTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonENTRARActionPerformed
-        // INICIO SESION A MENU
-        String Usuario = "admin";
-        String Contrasena = "123";
-        
-        String Pass = new String(PASSWORD.getPassword());
-        
-        if(USER.getText().equals(Usuario)&& Pass.equals(Contrasena)){
-                              
+        // INICIO SESION A MENU                
+        String user = new String(USER.getText());
+        String pass = new String(PASSWORD.getPassword());
+                
+        try {
+            if (IniciarSesion(user, pass)){
+                
                 MENU_ADMIN aux = new MENU_ADMIN();
                 aux.setVisible(true);
                 dispose();
+            }
+            
+            else
+                JOptionPane.showMessageDialog(this, "Usuario y/o Contrasena incorrecta");
+        } catch (Exception ex) {
+            Logger.getLogger(JFrame_INICIOADMIN.class.getName()).log(Level.SEVERE, null, ex);
         }
-        else
-            JOptionPane.showMessageDialog(this, "Usuario y/o Contrasena incorrecta");
-           
     }//GEN-LAST:event_jButtonENTRARActionPerformed
 
+        
     private void jButtonATRASActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonATRASActionPerformed
         // ATRAS AL PROGRAMA
         JFrame_PORTADA aux = new JFrame_PORTADA();

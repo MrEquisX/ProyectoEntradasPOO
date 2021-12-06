@@ -9,7 +9,7 @@ package CODIGO;
  *
  * @author ignac
  */
-public class Pago {
+public class Pago extends Exception {
     protected String nombre;
     protected String rut;
     protected boolean socio;

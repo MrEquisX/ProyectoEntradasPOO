@@ -10,8 +10,6 @@ package CODIGO;
  * @author ignac
  */
 public interface Venta {
-    
-    public String TIPOcliente= "Cliente con/sin descuento:";
-    public void imprimeInformacion();
-    
+    float calcularPrecio(); //Calcula el precio final para la venta
+    String getResultado(); // Devuelve el resultado final
 }
