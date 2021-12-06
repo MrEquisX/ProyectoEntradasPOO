@@ -7,6 +7,7 @@ package Ventanas;
 
 import CODIGO.CSVCode;
 import CODIGO.Eventos;
+import CODIGO.Region;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -78,6 +79,7 @@ public class MENU_AllEventos extends javax.swing.JFrame {
         SALIR = new javax.swing.JButton();
         TEXTO = new javax.swing.JLabel();
         jTextFILTRO = new javax.swing.JTextField();
+        REPORTE = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,6 +126,14 @@ public class MENU_AllEventos extends javax.swing.JFrame {
             }
         });
 
+        REPORTE.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        REPORTE.setText("REPORTE");
+        REPORTE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                REPORTEActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,6 +146,8 @@ public class MENU_AllEventos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFILTRO, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(REPORTE)
+                .addGap(18, 18, 18)
                 .addComponent(SALIR))
         );
         layout.setVerticalGroup(
@@ -146,7 +158,8 @@ public class MENU_AllEventos extends javax.swing.JFrame {
                     .addComponent(ATRAS, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SALIR, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TEXTO, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jTextFILTRO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFILTRO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(REPORTE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -187,6 +200,17 @@ public class MENU_AllEventos extends javax.swing.JFrame {
         trs = new TableRowSorter(tDatos);
         TablaEventos.setRowSorter(trs);
     }//GEN-LAST:event_jTextFILTROActionPerformed
+
+    private void REPORTEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REPORTEActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Eventos> lista = new ArrayList();
+        try {
+            lista = CSVCode.reporteEvento();
+            JOptionPane.showMessageDialog(null, "Reporte exitoso");
+        } catch (Exception ex) {
+            Logger.getLogger(MENU_ALLRegiones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_REPORTEActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,6 +253,7 @@ public class MENU_AllEventos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ATRAS;
+    private javax.swing.JButton REPORTE;
     private javax.swing.JButton SALIR;
     private javax.swing.JLabel TEXTO;
     private javax.swing.JTable TablaEventos;

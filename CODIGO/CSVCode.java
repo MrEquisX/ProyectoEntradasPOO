@@ -170,7 +170,7 @@ public class CSVCode extends Exception {
         return data;
     }
     
-    //Reporte
+    //Reporte Region
     public static ArrayList <Region> reporteRegion() throws Exception {
         try{
         ArrayList<Region> listaRegiones = new ArrayList();
@@ -297,6 +297,31 @@ public class CSVCode extends Exception {
             e.printStackTrace();
         }
     }
+    
+    //Reporte Eventos
+    public static ArrayList <Eventos> reporteEvento() throws Exception {
+        try{
+        ArrayList<Eventos> listaEventos = new ArrayList();
+        listaEventos = CSVCode.cargarEventos();
+        String ruta = "src/Database/reporteEvento.txt";
+        File reporte = new File(ruta);
+        
+        // Si el archivo no existe es creado
+            if (!reporte.exists()) {
+                reporte.createNewFile();
+            }
+        for(Eventos e : listaEventos){    
+            FileWriter fw = new FileWriter(reporte);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(e.getName());
+            bw.close();
+            System.out.println(e.getName());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }           
+     return null;  
+    }       
     
 //OPERACIONES HASHMAP
     //Anade info+Region
