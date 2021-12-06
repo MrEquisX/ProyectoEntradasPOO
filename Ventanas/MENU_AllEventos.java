@@ -7,7 +7,6 @@ package Ventanas;
 
 import CODIGO.CSVCode;
 import CODIGO.Eventos;
-import CODIGO.Region;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
