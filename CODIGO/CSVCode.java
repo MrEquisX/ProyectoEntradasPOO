@@ -13,10 +13,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -145,7 +148,6 @@ public class CSVCode extends Exception {
     }
            
 //METODOS REGIONES
-
     //retorna informacion de
     public String[] getInfoRegion(String id) {
         String [] data = new String[2];
@@ -158,6 +160,7 @@ public class CSVCode extends Exception {
         return data;
     }
     
+    //Retorna informacion de todas las regiones
     public ArrayList<String[]> getInfoRegiones() {
         ArrayList<String []> data = new ArrayList<String[]>();
 
@@ -168,35 +171,29 @@ public class CSVCode extends Exception {
     }
     
     //Reporte
-    public boolean reporteRegion(String id, String nombre) throws IOException, Exception{
+    public static ArrayList <Region> reporteRegion() throws Exception {
+        try{
         ArrayList<Region> listaRegiones = new ArrayList();
         listaRegiones = CSVCode.cargarRegiones();
-        File reporteRegion = new File("src/Database/Reporte.txt");
+        String ruta = "src/Database/reporteRegion.txt";
+        File reporte = new File(ruta);
         
-        //Si no existe es creado
-        if (!reporteRegion.exists()){
-            reporteRegion.createNewFile();
-        }
-        
-        List<String[]> data = new ArrayList<String[]>();
-        data.add(new String[] {"id", "nombre"});
-        
-        for (Region r : listaRegiones){
-            data.add(new String[] {r.getId(),r.getNombre()});
-        }
-        
-        data.add(new String[] {id , nombre});
-        FileWriter fw = new FileWriter (reporteRegion);
-        BufferedWriter bw = new BufferedWriter(fw);
-        
-        return true;
-        
-        
-        
-       
-        
-                
-    }
+        // Si el archivo no existe es creado
+            if (!reporte.exists()) {
+                reporte.createNewFile();
+            }
+        for(Region r : listaRegiones){    
+            FileWriter fw = new FileWriter(reporte);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(r.getNombre());
+            bw.close();
+            System.out.println(r.getNombre());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }           
+     return null;  
+    }       
                 
 //METODOS EVENTOS
      //Revisa si existe un evento segun su id

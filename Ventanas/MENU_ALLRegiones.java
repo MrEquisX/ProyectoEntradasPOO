@@ -6,12 +6,14 @@
 package Ventanas;
 
 import CODIGO.CSVCode;
+import CODIGO.Eventos;
 import CODIGO.Region;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static jdk.nashorn.internal.runtime.Debug.id;
 
 /**
  *
@@ -49,7 +51,7 @@ public class MENU_ALLRegiones extends javax.swing.JFrame {
             TablaRegiones.setModel(tDatos);
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e + "No hay regiones en la data base");
+            JOptionPane.showMessageDialog(null, e +"No hay regiones en la data base");
         }
            
     }
@@ -67,6 +69,7 @@ public class MENU_ALLRegiones extends javax.swing.JFrame {
         TablaRegiones = new javax.swing.JTable();
         ATRAS = new javax.swing.JButton();
         SALIR = new javax.swing.JButton();
+        Reporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,6 +100,14 @@ public class MENU_ALLRegiones extends javax.swing.JFrame {
             }
         });
 
+        Reporte.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Reporte.setText("Reporte");
+        Reporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReporteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,6 +116,8 @@ public class MENU_ALLRegiones extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ATRAS, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(Reporte)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(SALIR, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -115,7 +128,10 @@ public class MENU_ALLRegiones extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SALIR, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(ATRAS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ATRAS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Reporte)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -139,6 +155,18 @@ public class MENU_ALLRegiones extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_SALIRActionPerformed
+
+    private void ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Region> lista = new ArrayList();
+        try {
+            lista = CSVCode.reporteRegion();
+            JOptionPane.showMessageDialog(null, "Reporte exitoso");
+        } catch (Exception ex) {
+            Logger.getLogger(MENU_ALLRegiones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+    }//GEN-LAST:event_ReporteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,6 +207,7 @@ public class MENU_ALLRegiones extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ATRAS;
+    private javax.swing.JButton Reporte;
     private javax.swing.JButton SALIR;
     private javax.swing.JTable TablaRegiones;
     private javax.swing.JScrollPane jScrollPane1;
